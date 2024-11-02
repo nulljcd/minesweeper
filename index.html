@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>minesweeper</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html {
+      height: 100%;
+    }
+
+    body {
+      height: 100%;
+      margin: 0;
+      background-color: #323348;
+    }
+
+    #topBar {
+      height: 60px;
+      color: #a097c4;
+      text-align: center;
+      line-height: 50px;
+      font-size: 32px;
+      font-family: monospace;
+    }
+
+    #displayContainer {
+      height: calc(100% - 60px);
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="topBar">minesweeper</div>
+  <div id="displayContainer">
+    <canvas id="display"></canvas>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>
