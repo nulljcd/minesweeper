@@ -274,7 +274,7 @@ function init() {
 
   let imageLoader = new ImageLoader();
   imageLoader.load([
-    "assets/tileSprites.png"
+    "spriteSheet.png"
   ]).then(bufferedImages => {
     spriteSheet = bufferedImages[0];
 
