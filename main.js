@@ -1,3 +1,5 @@
+"use strict";
+
 class BufferedImage {
   constructor(width, height) {
     this.width = width;
@@ -108,10 +110,10 @@ class Display {
 
 
 let state = 0;
-let mapWidth = 10;
-let mapHeight = 8;
+let mapWidth = 16 * 2;
+let mapHeight = 10 * 2;
 let tileSize = 8;
-let numMines = 10;
+let numMines = 100;
 
 let tileData = new Uint8Array(mapWidth * mapHeight);
 let mineData = new Uint8Array(mapWidth * mapHeight);
@@ -128,6 +130,7 @@ let buffer = new BufferedImage(displayWidth, displayHeight);
 let display = new Display(canvas, displayWidth, displayHeight, 1);
 display.setScale(Math.min(displayContainer.clientWidth / canvas.width, displayContainer.clientHeight / canvas.height) * 0.9);
 window.onresize = () => display.setScale(Math.min(displayContainer.clientWidth / canvas.width, displayContainer.clientHeight / canvas.height) * 0.9);
+
 let spriteSheet = null;
 let imageLoader = new ImageLoader();
 imageLoader.load([
