@@ -1,5 +1,3 @@
-"use strict";
-
 class BufferedImage {
   constructor(width, height) {
     this.width = width;
@@ -122,13 +120,23 @@ let flagData = new Uint8Array(mapWidth * mapHeight);
 let countData = new Uint8Array(mapWidth * mapHeight);
 
 let topBar = document.querySelector("#topBar");
-let parent = document.querySelector("#displayContainer");
+let displayContainer = document.querySelector("#displayContainer");
 let canvas = document.querySelector('#display');
 let displayWidth = mapWidth * tileSize;
 let displayHeight = mapHeight * tileSize;
-let buffer = null;
-let display = null;
+let buffer = new BufferedImage(displayWidth, displayHeight);
+let display = new Display(canvas, displayWidth, displayHeight, 1);
+display.setScale(Math.min(displayContainer.clientWidth / canvas.width, displayContainer.clientHeight / canvas.height) * 0.9);
+window.onresize = () => display.setScale(Math.min(displayContainer.clientWidth / canvas.width, displayContainer.clientHeight / canvas.height) * 0.9);
 let spriteSheet = null;
+let imageLoader = new ImageLoader();
+imageLoader.load([
+  "spriteSheet.png"
+]).then(bufferedImages => {
+  spriteSheet = bufferedImages[0];
+  step(0, 0, 0);
+});
+document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 
@@ -223,15 +231,19 @@ function draw() {
 
 function step(tileX, tileY, button) {
   if (state == 0) {
+    state = 1;
+    resetData();
+    draw();
+    topBar.innerHTML = "minesweeper";
+  } else if (state == 1) {
     if (button == 0) {
-      state = 1;
+      state = 2;
       resetData();
       createMap(tileX, tileY);
       openData[tileX + tileY * mapWidth] = 1;
       zeroSpread(tileX, tileY);
       updateTileData();
       draw();
-      topBar.innerHTML = "minesweeper";
     }
   } else {
     if (button == 0) {
@@ -263,28 +275,3 @@ document.onmousedown = e => {
   if (mouseX >= 0 && mouseX < mapWidth && mouseY >= 0 && mouseY < mapHeight)
     step(mouseX, mouseY, button);
 };
-
-
-
-function init() {
-  buffer = new BufferedImage(displayWidth, displayHeight);
-  display = new Display(canvas, displayWidth, displayHeight, 1);
-  display.setScale(Math.min(parent.clientWidth / canvas.width, parent.clientHeight / canvas.height) * 0.9);
-  window.onresize = () => display.setScale(Math.min(parent.clientWidth / canvas.width, parent.clientHeight / canvas.height) * 0.9);
-
-  let imageLoader = new ImageLoader();
-  imageLoader.load([
-    "spriteSheet.png"
-  ]).then(bufferedImages => {
-    spriteSheet = bufferedImages[0];
-
-    resetData();
-    draw();
-  });
-
-  document.addEventListener('contextmenu', event => event.preventDefault());
-}
-
-
-
-init();
