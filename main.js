@@ -50,12 +50,12 @@ class ImageLoader {
             bufferedImages[i] = bufferedImage;
             if (i == sources.length - 1)
               resolve(bufferedImages);
-          } catch {
-            reject();
+          } catch (error) {
+            reject(error);
           }
         }
-        image.onerror = () => {
-          reject();
+        image.onerror = error => {
+          reject(error);
         }
         image.src = source;
       }
@@ -110,10 +110,10 @@ class Display {
 
 
 let state = 0;
-let mapWidth = 16 * 2;
-let mapHeight = 10 * 2;
+let mapWidth = 12;
+let mapHeight = 10;
 let tileSize = 8;
-let numMines = 100;
+let numMines = 28;
 
 let tileData = new Uint8Array(mapWidth * mapHeight);
 let mineData = new Uint8Array(mapWidth * mapHeight);
@@ -134,7 +134,7 @@ window.onresize = () => display.setScale(Math.min(displayContainer.clientWidth /
 let spriteSheet = null;
 let imageLoader = new ImageLoader();
 imageLoader.load([
-  "spriteSheet.png"
+  "https://raw.githubusercontent.com/nulljcd/minesweeper/refs/heads/main/spriteSheet.png"
 ]).then(bufferedImages => {
   spriteSheet = bufferedImages[0];
   step(0, 0, 0);
