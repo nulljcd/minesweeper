@@ -134,7 +134,7 @@ window.onresize = () => display.setScale(Math.min(displayContainer.clientWidth /
 let spriteSheet = null;
 let imageLoader = new ImageLoader();
 imageLoader.load([
-  "https://raw.githubusercontent.com/nulljcd/minesweeper/refs/heads/main/spriteSheet.png"
+  "spriteSheet.png"
 ]).then(bufferedImages => {
   spriteSheet = bufferedImages[0];
   step(0, 0, 0);
