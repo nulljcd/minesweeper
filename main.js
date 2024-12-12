@@ -110,10 +110,10 @@ class Display {
 
 
 let state = 0;
-let mapWidth = 16;
-let mapHeight = 10;
+let mapWidth = 10;
+let mapHeight = 8;
 let tileSize = 8;
-let numMines = 20;
+let numMines = 10;
 
 let tileData = new Uint8Array(mapWidth * mapHeight);
 let mineData = new Uint8Array(mapWidth * mapHeight);
