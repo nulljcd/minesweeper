@@ -128,8 +128,8 @@ let displayWidth = mapWidth * tileSize;
 let displayHeight = mapHeight * tileSize;
 let buffer = new BufferedImage(displayWidth, displayHeight);
 let display = new Display(canvas, displayWidth, displayHeight, 1);
-display.setScale(Math.min(displayContainer.clientWidth / canvas.width, displayContainer.clientHeight / canvas.height) * 0.9);
-window.onresize = () => display.setScale(Math.min(displayContainer.clientWidth / canvas.width, displayContainer.clientHeight / canvas.height) * 0.9);
+display.setScale(Math.min(displayContainer.clientWidth / canvas.width, displayContainer.clientHeight / canvas.height) * 0.75);
+window.onresize = () => display.setScale(Math.min(displayContainer.clientWidth / canvas.width, displayContainer.clientHeight / canvas.height) * 0.75);
 
 let spriteSheet = null;
 let imageLoader = new ImageLoader();
